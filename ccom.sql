@@ -2,14 +2,15 @@
 -- some fields are only applicable if a bool == true
 -- relational databases can handle null types but it changes how queries work
 
--- with the fields for pdf/file, need to look into how to handle those datatypes, for now just a placeholder
+-- with the fields for varchar/file, need to look into how to handle those datatypes, for now just a placeholder
+-- what i've seen is varchar is the way to do files, there's also a FILESTREAM thing that could work if we're storing the files local to the database
 -- arrays aren't really a thing in SQL, so additional tables might be the way to go
--- also need to come up with more descriptive 
+-- also need to come up with more descriptive names
 
 CREATE TABLE "User" (
     "UserID" int  NOT NULL ,
-    "Name" string  NOT NULL ,
-    "Password" string  NOT NULL ,
+    "Name" text  NOT NULL ,
+    "Password" text  NOT NULL ,
     CONSTRAINT "pk_User" PRIMARY KEY (
         "UserID"
     )
@@ -19,7 +20,7 @@ GO
 
 CREATE TABLE "Project" (
     "ProjectID" int  NOT NULL ,
-    "PName" string  NOT NULL ,
+    "PName" text  NOT NULL ,
     "PAccess" ARRAY  NOT NULL 
 )
 
@@ -36,15 +37,15 @@ GO
 CREATE TABLE "SectionB" (
     "ProjectID" int  NOT NULL ,
     "Goals" text  NOT NULL ,
-    "GoalsChange" bool  NOT NULL ,
+    "GoalsChange" bit  NOT NULL ,
     -- speicifc sections that could be broken up
     -- in accomplished if need be
-    "Accomplished" pdf  NOT NULL ,
-    "Revisions" bool  NOT NULL ,
-    -- if bool = true
+    "Accomplished" varchar  NOT NULL ,
+    "Revisions" bit  NOT NULL ,
+    -- if bit = true
     "RevisionType" array NOT NULL ,
     -- training sections could be broken up
-    "TrainingOps" pdf  NOT NULL ,
+    "TrainingOps" varchar  NOT NULL ,
     "Results" text  NOT NULL ,
     "FuturePlans" text  NOT NULL 
 )
@@ -59,7 +60,7 @@ CREATE TABLE "SectionC" (
     "Sites" array NOT NULL ,
     -- has subsections that could be broken up (array of arrays)
     "Technologies" array NOT NULL ,
-    "Inventions" bool  NOT NULL ,
+    "Inventions" bit  NOT NULL ,
     -- again has subsections
     "SigProducts" array NOT NULL 
 )
@@ -70,42 +71,42 @@ CREATE TABLE "SectionD" (
     "ProjectID" int  NOT NULL ,
     -- desciptions could be stored seperate or together
     "Individuals" array NOT NULL ,
-    "EffortChange" bool  NOT NULL ,
+    "EffortChange" bit  NOT NULL ,
     -- needs manual entry option
     "EffortLevel" array NOT NULL ,
-    "NewPersonnel" bool  NOT NULL ,
-    "PersonnelInfo" pdf  NOT NULL ,
-    "SupportChange" bool  NOT NULL ,
-    "SupportInfo" pdf  NOT NULL ,
-    "NewContributors" bool  NOT NULL ,
-    "ContributorInfo" pdf  NOT NULL ,
-    "LeadershipChange" bool  NOT NULL ,
-    "LeadershipInfo" pdf  NOT NULL 
+    "NewPersonnel" bit  NOT NULL ,
+    "PersonnelInfo" varchar  NOT NULL ,
+    "SupportChange" bit  NOT NULL ,
+    "SupportInfo" varchar  NOT NULL ,
+    "NewContributors" bit  NOT NULL ,
+    "ContributorInfo" varchar  NOT NULL ,
+    "LeadershipChange" bit  NOT NULL ,
+    "LeadershipInfo" varchar  NOT NULL 
 )
 
 GO
 
 CREATE TABLE "SectionEF" (
     "ProjectID" int  NOT NULL ,
-    "Impact" string  NOT NULL ,
+    "Impact" text  NOT NULL ,
     "ForiegnDollar" int  NOT NULL ,
-    "Probelms" pf  NOT NULL 
+    "Probelms" varchar  NOT NULL 
 )
 
 GO
 
 CREATE TABLE "SectionG" (
     "ProjectID" int  NOT NULL ,
-    "SpecialNotice" pdf  NOT NULL ,
+    "SpecialNotice" varchar  NOT NULL ,
     "SiteChanges" array NOT NULL ,
     "ForeignComponent" array NOT NULL ,
-    "ForeignDetails" string  NOT NULL ,
-    "OverBudget" bool  NOT NULL ,
+    "ForeignDetails" text  NOT NULL ,
+    "OverBudget" bit  NOT NULL ,
     "BudgetPercentage" int  NOT NULL ,
-    "BudgetExplination" string  NOT NULL ,
-    "OverBudgetUse" string  NOT NULL ,
-    "ProgramIncome" bool  NOT NULL ,
-    "SiteChange" string  NOT NULL 
+    "BudgetExplination" text  NOT NULL ,
+    "OverBudgetUse" text  NOT NULL ,
+    "ProgramIncome" bit  NOT NULL ,
+    "SiteChange" text  NOT NULL 
 )
 
 GO
@@ -113,11 +114,11 @@ GO
 CREATE TABLE "SectionHIJ" (
     "ProjectID" int  NOT NULL ,
     -- just says attachment, could be something else
-    "BudgetA" pdf  NOT NULL ,
+    "BudgetA" varchar  NOT NULL ,
     -- same deal with attachment
-    "BudgetB" pdf  NOT NULL ,
-    "Awards" string  NOT NULL ,
-    "AdditionalDocs" pdf  NOT NULL 
+    "BudgetB" varchar  NOT NULL ,
+    "Awards" text  NOT NULL ,
+    "AdditionalDocs" varchar  NOT NULL 
 )
 
 GO
