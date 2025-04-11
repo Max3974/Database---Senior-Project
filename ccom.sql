@@ -40,10 +40,10 @@ CREATE TABLE "SectionB" (
     "GoalsChange" bit  NOT NULL ,
     -- speicifc sections that could be broken up
     -- in accomplished if need be
-    "Accomplished" varchar  NOT NULL ,
+    "Accomplished" varchar,
     "Revisions" bit  NOT NULL ,
     -- if bit = true
-    "RevisionType" array NOT NULL ,
+    "RevisionType" array,
     -- training sections could be broken up
     "TrainingOps" varchar  NOT NULL ,
     "Results" text  NOT NULL ,
@@ -55,9 +55,9 @@ GO
 CREATE TABLE "SectionC" (
     "ProjectID" int  NOT NULL ,
     -- need to be able to put a manual entry (append array)
-    "Publications" array NOT NULL ,
+    "Publications" array,
     -- same idea, append array
-    "Sites" array NOT NULL ,
+    "Sites" text,
     -- has subsections that could be broken up (array of arrays)
     "Technologies" array NOT NULL ,
     "Inventions" bit  NOT NULL ,
