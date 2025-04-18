@@ -21,15 +21,24 @@ GO
 CREATE TABLE "Project" (
     "ProjectID" int  NOT NULL ,
     "PName" text  NOT NULL ,
-    "PAccess" ARRAY  NOT NULL 
+    --this ID links to UserID in User table
+    "PAccessID" int  NOT NULL 
 )
 
 GO
 
 CREATE TABLE "SectionA" (
     "ProjectID" int  NOT NULL ,
-    "SigningOfficial" array NOT NULL ,
-    "AdministrativeOfficial" array  NOT NULL 
+    -- maps to officials table
+    "SigningOfficial" text NOT NULL ,
+    "AdministrativeOfficial" text  NOT NULL 
+)
+
+GO
+
+CREATE TABLE "Officials" (
+    "OName" text NOT NULL ,
+    "OfficialID" int NOT NULL
 )
 
 GO
@@ -54,12 +63,12 @@ GO
 
 CREATE TABLE "SectionC" (
     "ProjectID" int  NOT NULL ,
-    -- need to be able to put a manual entry (append array)
-    "Publications" array,
+    -- just making this a manual entry
+    "Publications" text,
     -- same idea, append array
     "Sites" text,
-    -- has subsections that could be broken up (array of arrays)
-    "Technologies" array NOT NULL ,
+    -- maps to TName in Technologies
+    "Technologies" text NOT NULL ,
     "Inventions" bit  NOT NULL ,
     -- again has subsections
     "SigProducts" array NOT NULL 
@@ -67,13 +76,22 @@ CREATE TABLE "SectionC" (
 
 GO
 
+CREATE TABLE "Technologies" (
+    "TName" text NOT NULL ,
+    "TechID" int NOT NULL,
+    "Description" text NOT NULL
+)
+
+GO
+
 CREATE TABLE "SectionD" (
     "ProjectID" int  NOT NULL ,
     -- desciptions could be stored seperate or together
-    "Individuals" array NOT NULL ,
+    "Individuals" text NOT NULL ,
     "EffortChange" bit  NOT NULL ,
     -- needs manual entry option
-    "EffortLevel" array NOT NULL ,
+    "EffortLevel" text NOT NULL ,
+    "EffortPercent" int NOT NULL ,
     "NewPersonnel" bit  NOT NULL ,
     "PersonnelInfo" varchar  NOT NULL ,
     "SupportChange" bit  NOT NULL ,
@@ -107,6 +125,13 @@ CREATE TABLE "SectionG" (
     "OverBudgetUse" text  NOT NULL ,
     "ProgramIncome" bit  NOT NULL ,
     "SiteChange" text  NOT NULL 
+)
+
+GO
+
+CREATE TABLE "Sites" (
+    "SName" text NOT NULL,
+    "SiteID" int NOT NULL
 )
 
 GO
